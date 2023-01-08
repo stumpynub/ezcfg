@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://co1ejsj0dtibw"]
+
+[ext_resource type="Script" path="res://ezcfg/ezcfg.gd" id="1_bj83p"]
+[ext_resource type="Script" path="res://ezcfg/demo/ezcfg_demo.gd" id="1_qstw0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qstw0")
+
+[node name="EzCfg" type="Node" parent="."]
+script = ExtResource("1_bj83p")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SliderValue1" type="VBoxContainer" parent="CenterContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer3/SliderValue1"]
+layout_mode = 2
+text = "value 1"
+
+[node name="HSlider" type="HSlider" parent="CenterContainer/VBoxContainer3/SliderValue1"]
+layout_mode = 2
+
+[node name="SliderValue2" type="VBoxContainer" parent="CenterContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer3/SliderValue2"]
+layout_mode = 2
+text = "value 1"
+
+[node name="HSlider2" type="HSlider" parent="CenterContainer/VBoxContainer3/SliderValue2"]
+layout_mode = 2
+
+[node name="CheckboxValue" type="VBoxContainer" parent="CenterContainer/VBoxContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="CenterContainer/VBoxContainer3/CheckboxValue"]
+layout_mode = 2
+text = "value 3"
+
+[connection signal="loaded" from="EzCfg" to="." method="_on_ez_cfg_loaded"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer3/SliderValue1/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer3/SliderValue2/HSlider2" to="." method="_on_h_slider_2_value_changed"]
+[connection signal="toggled" from="CenterContainer/VBoxContainer3/CheckboxValue/CheckBox" to="." method="_on_check_box_toggled"]
