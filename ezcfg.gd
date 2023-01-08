@@ -45,7 +45,7 @@ func get_config_value(section, key):
 			file.save(get_config_path())
 		return file.get_value(section, key, 0)
 
-func save_value(section, key, value): 
+func save_config_value(section, key, value): 
 	if is_file_found(): 
 		var file = get_config_file()
 		file.set_value(section, key, value)
