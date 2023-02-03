@@ -14,7 +14,8 @@ signal saved
 signal loaded
 
 func _ready():
-	pass
+	if !is_file_found(): 
+		save_file()
 	
 func delete_file():
 	# checks if a file exists, if so delete it 
@@ -33,7 +34,8 @@ func save_file(file=get_file()) -> ConfigFile:
 	return config
 
 func load_file(): 
-	if is_file_found():
+	if is_file_found(): 
+		print("file found")
 		emit_signal("loaded")
 
 func get_value(section, key): 
