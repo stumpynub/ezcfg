@@ -2,10 +2,13 @@ extends Node
 
 class_name EzCfg
 
-# path root where our file will be saved
-# 0 = project folder 
-# 1 = users folder (persistent data) 
-@export_enum(res, user) var path_root = 0
+enum e_fs { 
+	res, 
+	user
+}
+
+
+@export var fs: e_fs = e_fs.res
 
 const filename = "settings" # filename for our config file
 
@@ -38,7 +41,7 @@ func load_file():
 		print("file found")
 		emit_signal("loaded")
 
-func get_value(section, key): 
+func get_value(section, key, default): 
 	# returns the request value from our cfg file
 	if is_file_found(): 
 		var file = get_file()
@@ -46,9 +49,9 @@ func get_value(section, key):
 		# if no value is found save a new value with the given params
 		# TODO: may not be desired outcome so make an option to not save 
 		if !file.has_section_key(section, key): 
-			file.set_value(section, key, 0)
+			file.set_value(section, key, default)
 			save_file()
-		return file.get_value(section, key, 0)
+		return file.get_value(section, key, default)
 
 func save_value(section, key, value): 
 	if is_file_found():  
@@ -68,9 +71,7 @@ func get_file() -> ConfigFile:
 	
 func get_path_root() -> String: 
 	# returns path root where our file will be saved 
-	# 0 = project folder
-	# 1 = users folder (persistent data) 
-	if path_root == 0: 
+	if fs == e_fs.res: 
 		return "res"
 		
 	return "user"
